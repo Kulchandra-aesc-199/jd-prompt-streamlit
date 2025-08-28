@@ -202,7 +202,7 @@ Return only the enhanced job description text in a readable, formatted paragraph
 
     # Display the prompt
     with st.expander("🔍 View/Edit Prompt", expanded=False):
-        edited_prompt = st.text_area(
+        st.text_area(
             "Prompt (you can edit this):",
             value=main_prompt,
             height=400,
@@ -211,11 +211,13 @@ Return only the enhanced job description text in a readable, formatted paragraph
         
         # Save button for the prompt
         if st.button("💾 Save Prompt Changes", key="save_step1_prompt"):
-            st.session_state.step1_prompt = edited_prompt
+            # Get the current value from the text area
+            current_prompt = st.session_state.get("step1_prompt", main_prompt)
+            st.session_state.saved_step1_prompt = current_prompt
             st.success("✅ Prompt saved successfully!")
         
         # Use saved prompt if available, otherwise use default
-        prompt_to_use = st.session_state.get('step1_prompt', main_prompt)
+        prompt_to_use = st.session_state.get('saved_step1_prompt', main_prompt)
     
     # Execute button
     if st.button("🚀 Execute Text Enhancement", type="primary", use_container_width=True):
@@ -451,7 +453,7 @@ Return ONLY a valid JSON object with the specified fields."""
 
     # Display prompts
     with st.expander("🔍 View/Edit Skills Prompt", expanded=False):
-        edited_skills_prompt = st.text_area(
+        st.text_area(
             "Skills Extraction Prompt:",
             value=skills_prompt,
             height=300,
@@ -460,14 +462,16 @@ Return ONLY a valid JSON object with the specified fields."""
         
         # Save button for the skills prompt
         if st.button("💾 Save Skills Prompt", key="save_skills_prompt"):
-            st.session_state.skills_prompt = edited_skills_prompt
+            # Get the current value from the text area
+            current_skills_prompt = st.session_state.get("skills_prompt", skills_prompt)
+            st.session_state.saved_skills_prompt = current_skills_prompt
             st.success("✅ Skills prompt saved successfully!")
         
         # Use saved prompt if available, otherwise use default
-        skills_prompt_to_use = st.session_state.get('skills_prompt', skills_prompt)
+        skills_prompt_to_use = st.session_state.get('saved_skills_prompt', skills_prompt)
     
     with st.expander("🔍 View/Edit Responsibilities Prompt", expanded=False):
-        edited_responsibilities_prompt = st.text_area(
+        st.text_area(
             "Responsibilities Extraction Prompt:",
             value=responsibilities_prompt,
             height=300,
@@ -476,14 +480,16 @@ Return ONLY a valid JSON object with the specified fields."""
         
         # Save button for the responsibilities prompt
         if st.button("💾 Save Responsibilities Prompt", key="save_responsibilities_prompt"):
-            st.session_state.responsibilities_prompt = edited_responsibilities_prompt
+            # Get the current value from the text area
+            current_responsibilities_prompt = st.session_state.get("responsibilities_prompt", responsibilities_prompt)
+            st.session_state.saved_responsibilities_prompt = current_responsibilities_prompt
             st.success("✅ Responsibilities prompt saved successfully!")
         
         # Use saved prompt if available, otherwise use default
-        responsibilities_prompt_to_use = st.session_state.get('responsibilities_prompt', responsibilities_prompt)
+        responsibilities_prompt_to_use = st.session_state.get('saved_responsibilities_prompt', responsibilities_prompt)
     
     with st.expander("🔍 View/Edit Base Info Prompt", expanded=False):
-        edited_base_info_prompt = st.text_area(
+        st.text_area(
             "Base Info Extraction Prompt:",
             value=base_info_prompt,
             height=300,
@@ -492,11 +498,13 @@ Return ONLY a valid JSON object with the specified fields."""
         
         # Save button for the base info prompt
         if st.button("💾 Save Base Info Prompt", key="save_base_info_prompt"):
-            st.session_state.base_info_prompt = edited_base_info_prompt
+            # Get the current value from the text area
+            current_base_info_prompt = st.session_state.get("base_info_prompt", base_info_prompt)
+            st.session_state.saved_base_info_prompt = current_base_info_prompt
             st.success("✅ Base info prompt saved successfully!")
         
         # Use saved prompt if available, otherwise use default
-        base_info_prompt_to_use = st.session_state.get('base_info_prompt', base_info_prompt)
+        base_info_prompt_to_use = st.session_state.get('saved_base_info_prompt', base_info_prompt)
     
     # Execute button
     if st.button("🚀 Execute Structured Extraction", type="primary", use_container_width=True):
